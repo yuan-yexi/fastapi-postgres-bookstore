@@ -1,2 +1,4 @@
 databases~=0.7.0
 sqlalchemy~=1.4.47
+fastapi~=0.95.0
+alembic~=1.10.3
