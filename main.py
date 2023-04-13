@@ -14,6 +14,16 @@ books = sqlalchemy.Table(
     sqlalchemy.Column("title", sqlalchemy.String),
     sqlalchemy.Column("author", sqlalchemy.String),
     sqlalchemy.Column("pages", sqlalchemy.Integer),
+    sqlalchemy.Column("reader_id", sqlalchemy.ForeignKey("readers.id", name="fk_read_id"), nullable=False),
+)
+
+readers = sqlalchemy.Table(
+    "readers",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, unique=True),
+    sqlalchemy.Column("first_name", sqlalchemy.String, primary_key=True),
+    sqlalchemy.Column("last_name", sqlalchemy.String, primary_key=True),
+    sqlalchemy.UniqueConstraint("id", name="unique_id")
 )
 
 # engine = sqlalchemy.create_engine(DATABASE_URL)
