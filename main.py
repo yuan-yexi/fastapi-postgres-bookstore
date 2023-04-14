@@ -54,3 +54,11 @@ async def create_book(request: Request):
     query = books.insert().values(**data)
     last_record_id = await database.execute(query)
     return {"id": last_record_id}
+
+
+@app.post("/readers/")
+async def create_book(request: Request):
+    data = await request.json()
+    query = readers.insert().values(**data)
+    last_record_id = await database.execute(query)
+    return {"id": last_record_id}
