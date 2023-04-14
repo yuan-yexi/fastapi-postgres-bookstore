@@ -1,8 +1,9 @@
 import databases
 import sqlalchemy
+from decouple import config
 from fastapi import FastAPI, Request
 
-DATABASE_URL = "postgresql://postgres:password@localhost:5432/store"
+DATABASE_URL = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}@localhost:5432/store"
 
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
@@ -32,12 +33,13 @@ publisher = sqlalchemy.Table(
 )
 
 
-# readers_books = sqlalchemy.Table(
-#     "readers_books",
-#     metadata,
-#     sqlalchemy.Column("_id", sqlalchemy.Integer, primary_key=True, unique=True, index=True),
-#     sqlalchemy.Column("books_id", sqlalchemy.ForeignKey("books.id"))
-# )
+readers_books = sqlalchemy.Table(
+    "readers_books",
+    metadata,
+    sqlalchemy.Column("_id", sqlalchemy.Integer, primary_key=True, unique=True, index=True),
+    sqlalchemy.Column("book_id", sqlalchemy.ForeignKey("books._id"), nullable=False),
+    sqlalchemy.Column("reader_id", sqlalchemy.ForeignKey("readers._id"), nullable=False),
+)
 
 # engine = sqlalchemy.create_engine(DATABASE_URL)
 # metadata.create_all(engine)  # create all tables
