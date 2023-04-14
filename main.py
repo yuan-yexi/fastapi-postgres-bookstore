@@ -10,20 +10,18 @@ metadata = sqlalchemy.MetaData()
 books = sqlalchemy.Table(
     "books",
     metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
+    sqlalchemy.Column("_id", sqlalchemy.Integer, primary_key=True, unique=True),
     sqlalchemy.Column("title", sqlalchemy.String),
     sqlalchemy.Column("author", sqlalchemy.String),
     sqlalchemy.Column("pages", sqlalchemy.Integer),
-    sqlalchemy.Column("publisher_id", sqlalchemy.ForeignKey("publisher._id"), index=True),
 )
 
 readers = sqlalchemy.Table(
     "readers",
     metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, unique=True),
-    sqlalchemy.Column("first_name", sqlalchemy.String, primary_key=True),
-    sqlalchemy.Column("last_name", sqlalchemy.String, primary_key=True),
-    sqlalchemy.UniqueConstraint("id", name="unique_id")
+    sqlalchemy.Column("_id", sqlalchemy.Integer, primary_key=True, index=True, unique=True),
+    sqlalchemy.Column("first_name", sqlalchemy.String),
+    sqlalchemy.Column("last_name", sqlalchemy.String),
 )
 
 
@@ -31,8 +29,15 @@ publisher = sqlalchemy.Table(
     "publisher",
     metadata,
     sqlalchemy.Column("_id", sqlalchemy.Integer, primary_key=True, index=True, unique=True),
-    sqlalchemy.Column("name", sqlalchemy.String),
 )
+
+
+# readers_books = sqlalchemy.Table(
+#     "readers_books",
+#     metadata,
+#     sqlalchemy.Column("_id", sqlalchemy.Integer, primary_key=True, unique=True, index=True),
+#     sqlalchemy.Column("books_id", sqlalchemy.ForeignKey("books.id"))
+# )
 
 # engine = sqlalchemy.create_engine(DATABASE_URL)
 # metadata.create_all(engine)  # create all tables
