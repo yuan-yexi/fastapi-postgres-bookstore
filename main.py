@@ -14,7 +14,6 @@ books = sqlalchemy.Table(
     sqlalchemy.Column("title", sqlalchemy.String),
     sqlalchemy.Column("author", sqlalchemy.String),
     sqlalchemy.Column("pages", sqlalchemy.Integer),
-    sqlalchemy.Column("reader_id", sqlalchemy.ForeignKey("readers.id", name="fk_read_id"), nullable=False),
     sqlalchemy.Column("publisher_id", sqlalchemy.ForeignKey("publisher._id"), index=True),
 )
 
