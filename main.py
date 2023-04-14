@@ -25,13 +25,11 @@ readers = sqlalchemy.Table(
     sqlalchemy.Column("last_name", sqlalchemy.String),
 )
 
-
 publisher = sqlalchemy.Table(
     "publisher",
     metadata,
     sqlalchemy.Column("_id", sqlalchemy.Integer, primary_key=True, index=True, unique=True),
 )
-
 
 readers_books = sqlalchemy.Table(
     "readers_books",
@@ -41,8 +39,6 @@ readers_books = sqlalchemy.Table(
     sqlalchemy.Column("reader_id", sqlalchemy.ForeignKey("readers._id"), nullable=False),
 )
 
-# engine = sqlalchemy.create_engine(DATABASE_URL)
-# metadata.create_all(engine)  # create all tables
 
 app = FastAPI()
 
